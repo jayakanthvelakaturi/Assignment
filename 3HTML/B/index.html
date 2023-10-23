@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>Assignment Survey Form</h2> 
+
+    <form id="myForm">
+
+        <label for="fname">First Name:</label><br>
+        <input type="text" id="fname" name="fname" required><br>
+
+        <label for="lname">Last Name:</label><br>
+        <input type="text" id="lname" name="lname" required><br>
+
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" id="dob" name="dob" required><br>
+
+        <label for="country">Country:</label><br>
+
+        <select id="country" name="country" required>
+
+            <option value="">Select...</option>
+            <option value="usa">USA</option>
+            <option value="uk">UK</option>
+            <option value="canada">Canada</option>
+            <option value="australia">Australia</option>
+
+        </select><br>
+
+        <label for="gender">Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="male" required> <label for="male">Male</label><br>
+
+        <input type="radio" id="female" name="gender" value="female" required>
+        <label for="female">Female</label><br>
+
+        <label for="profession">Profession:</label><br>
+        <input type="text" id="profession" name="profession" required><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        
+        <label for="mobilenumber">Mobile Number:</label><br>
+        <input type="tel" id="mobilenumber" name="mobilenumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+
+        <input type="button" value="Submit" onclick="validateForm()">
+
+        <input type="reset" value="Reset">
+        
+    </form>
+    
+    <script>
+        function validateForm(){
+            let form = document.getElementById('myForm');
+            let inputs = form.getElementsByTagName('input');
+            let selects = form.getElementsByTagName('select');
+            let isValid = true;
+
+            for (let i = 0; i < inputs.length; i++) {
+                if (inputs[i].type !== 'radio' && inputs[i].type !== 'button' && inputs[i].type !== 'reset') {
+                    if (inputs[i].value === '') {
+                        isValid = false; break; 
+                    }
+                }
+            } 
+
+            for (let i = 0; i < selects.length; i++){
+                if (selects[i].value === ''){
+                    isValid = false; break; 
+                }
+            } 
+
+            if (isValid){
+                let fields = [ 'fname', 'lname', 'dob', 'country', 'gender', 'profession', 'email', 'mobilenumber' ];
+                let formData = '';
+
+                for (let i = 0; i < fields.length; i++) {
+                    formData += fields[i] + ': ' + document.getElementById(fields[i]).value + '<br>';
+                }
+
+                alert(formData);
+                form.reset();
+            }
+
+            else{
+                alert('Please fill in all required fields.'); 
+            }
+        }
+    </script>
+    
+</body>
+</html>
+
